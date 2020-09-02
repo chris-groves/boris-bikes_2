@@ -23,6 +23,16 @@ describe DockingStation do
     expect { docking_station.dock(Bike.new) }.to raise_error('Dockingstation is full')
   end
 
+  it 'allows a custom capacity to be set' do
+    station = DockingStation.new(25)
+    expect(station.capacity).to eq 25
+  end
+
+  it 'has a default capacity' do
+    station = DockingStation.new
+    expect(station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
   describe '#release_bike' do
     it 'prevents the release of bikes if docking station is empty' do
       station = DockingStation.new

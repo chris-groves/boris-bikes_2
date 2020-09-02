@@ -1,12 +1,13 @@
 require 'pry'
 
 class DockingStation
-  attr_accessor :docked_bikes
+  attr_accessor :docked_bikes, :capacity
 
   DEFAULT_CAPACITY = 20
 
-  def initialize
+  def initialize(capacity = DEFAULT_CAPACITY)
     @docked_bikes = []
+    @capacity = capacity
   end
 
   def release_bike
