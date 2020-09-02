@@ -19,7 +19,7 @@ describe DockingStation do
 
   it 'prevents bikes being docked when capacity is reached' do
     docking_station = DockingStation.new
-    20.times { docking_station.dock(Bike.new) }
+    DockingStation::DEFAULT_CAPACITY.times { docking_station.dock(Bike.new) }
     expect { docking_station.dock(Bike.new) }.to raise_error('Dockingstation is full')
   end
 
