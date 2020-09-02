@@ -3,6 +3,8 @@ require 'pry'
 class DockingStation
   attr_accessor :docked_bikes
 
+  DEFAULT_CAPACITY = 20
+
   def initialize
     @docked_bikes = []
   end
@@ -20,7 +22,7 @@ class DockingStation
   private
 
   def full?
-    @docked_bikes.length > 0
+    @docked_bikes.length == DEFAULT_CAPACITY
   end
 
   def empty?
