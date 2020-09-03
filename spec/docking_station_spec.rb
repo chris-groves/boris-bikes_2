@@ -7,14 +7,30 @@ describe DockingStation do
     bike = Bike.new
     station.dock(bike)
     station.release_bike
-    expect(bike).to be_working
+    expect(bike.working).to eq true
   end
 
-  it 'it docks bikes' do
-    docking_station = DockingStation.new
+  it 'does not release a broken bike' do
+    station = DockingStation.new
     bike = Bike.new
-    docking_station.dock(bike)
-    expect(docking_station.docked_bikes).to eq [bike]
+    bike.report_broken
+    station.dock(bike)
+    expect { station.release_bike }.to raise_error('There are no working bikes')
+  end
+
+  it 'docks a working bike' do
+    station = DockingStation.new
+    bike = Bike.new
+    station.dock(bike)
+    expect(station.working_docked_bikes).to eq [bike]
+  end
+
+  it 'docks a broken bike' do
+    station = DockingStation.new
+    bike = Bike.new
+    bike.report_broken
+    station.dock(bike)
+    expect(station.broken_docked_bikes).to eq [bike]
   end
 
   it 'prevents bikes being docked when capacity is reached' do
